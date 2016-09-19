@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML Form Validator Application</title>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+        crossorigin="anonymous"></script>
+
+    <script src="formvalidator.js"></script>
+
+    <style>
+        /* The Modal (background) */
+        
+        .modal {
+            display: block;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+        /* Modal Content */
+        
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 365px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+        /* Add Animation */
+        
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+        
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+        /* The Close Button */
+        
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .modal-body {
+            padding: 2px 16px;
+        }
+        
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        input[type="text"] {
+            width: 200px;
+        }
+        
+        input[type="password"] {
+            width: 200px;
+        }
+        
+        input[type="submit"] {
+            width: 125px;
+        }
+        
+        .tooltiptext {
+            visibility:hidden;
+            width: 232px;
+            background-color: lightgoldenrodyellow;
+            color: red;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            left: 105%;
+            font-size:15px;
+			border: 1px solid gray;
+        }
+        
+        .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent red transparent transparent;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">×</span>
+                <h2>New User Subscription</h2>
+            </div>
+            <div class="modal-body" style="padding:30px 30px 30px 30px;">
+                <form id="userform" method="post">
+                    <table>
+                        <tr>
+                            <td valign="top" style="padding:5px;">
+
+                                First name:
+                            </td>
+                            <td>
+                                <div style="position: relative;display: inline-block;">
+                                    <input type="text" id="firstName" name="firstname"><span class="tooltiptext" style="position:absolute;padding-left:5px;color:red;"
+                                        id="firstNameErrors"></span>
+                                </div><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:5px;">
+
+                                Last name:
+                            </td>
+                            <td>
+                                <div style="position: relative;display: inline-block;">
+                                    <input type="text" id="lastName" name="lastname"><span class="tooltiptext" style="position:absolute;padding-left:5px;color:red;"
+                                        id="lastNameErrors"></span>
+                                </div><br>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:5px;">
+
+                                Age:
+                            </td>
+                            <td>
+                                <div style="position: relative;display: inline-block;">
+                                    <input type="text" id="age" name="Age"><span class="tooltiptext" style="position:absolute;padding-left:5px;color:red;"
+                                        id="ageErrors"></span>
+                                </div>
+                                <br>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:5px;">
+
+                                SSN:
+                            </td>
+                            <td>
+                                <div style="position: relative;display: inline-block;">
+                                    <input type="text" id="ssn" name="ssn"><span class="tooltiptext" style="position:absolute;padding-left:5px;color:red;"
+                                        id="ssnErrors"></span>
+                                </div>
+                                <br>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:5px;">
+
+                                Email:
+                            </td>
+                            <td>
+                                <div style="position: relative;display: inline-block;">
+                                    <input type="text" id="email" name="email"><span class="tooltiptext" style="position:absolute;padding-left:5px;color:red;"
+                                        id="emailErrors"></span>
+                                </div>
+                                <br>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:5px;">
+                                Password:
+                            </td>
+                            <td>
+                                <div style="position: relative;display: inline-block;">
+                                    <input type="password" id="password" name="password"><span class="tooltiptext" style="position:absolute;padding-left:5px;color:red;"
+                                        id="passwordErrors"></span>
+                                </div>
+                                <br>
+
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    <div style="height:28px;">
+                        <table width="100%">
+                            <tr>
+                                <td style="padding:10px;">
+                                    <input type="submit" value="Submit">
+                                </td>
+                                <td style="padding:10px;">
+                                    <input type="submit" value="Cancel">
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
